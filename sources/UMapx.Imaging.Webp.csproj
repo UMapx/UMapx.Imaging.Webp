@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<LangVersion>8.0</LangVersion>
-		<Version>5.2.4.5</Version>
+		<Version>5.2.4.6</Version>
 		<PackageId>UMapx.Imaging.Webp</PackageId>
 		<Company>Valery Asiryan</Company>
 		<Authors>Valery Asiryan</Authors>
@@ -19,8 +19,8 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageIcon>umapxnet.png</PackageIcon>
-		<AssemblyVersion>5.2.4.5</AssemblyVersion>
-		<FileVersion>5.2.4.5</FileVersion>
+		<AssemblyVersion>5.2.4.6</AssemblyVersion>
+		<FileVersion>5.2.4.6</FileVersion>
 		<SignAssembly>false</SignAssembly>
 		<AssemblyOriginatorKeyFile>umapxnet.pfx</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
@@ -41,17 +41,22 @@
 		<OutputPath>bin\Release\</OutputPath>
 	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="UMapx" Version="5.2.4.5" />
-  </ItemGroup>
+	<ItemGroup>
+	  <None Remove="libwebp_x64.dll" />
+	  <None Remove="libwebp_x86.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="libwebp_x64.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="libwebp_x86.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
 
   <ItemGroup>
-    <None Update="libwebp_x64.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="libwebp_x86.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <PackageReference Include="UMapx" Version="5.2.4.5" />
   </ItemGroup>
 
 	<ItemGroup>

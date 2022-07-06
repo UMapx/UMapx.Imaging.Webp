@@ -1047,7 +1047,7 @@ namespace UMapx.Imaging
 
     /// <summary>Decoding options</summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct WebPDecoderOptions
+    internal struct WebPDecoderOptions
     {
         /// <summary>If true, skip the in-loop filtering</summary>
         public int bypass_filtering;

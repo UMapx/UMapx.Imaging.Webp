@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UMapx.Imaging.Webp.Example", "UMapx.Imaging.Webp.Example.csproj", "{61F35184-75D0-4571-A5C2-A3DE07BF3BBD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UMapx.Imaging.Webp", "..\sources\UMapx.Imaging.Webp.csproj", "{52E896F9-1A24-4C04-BFFF-F772B96B817C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61F35184-75D0-4571-A5C2-A3DE07BF3BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F35184-75D0-4571-A5C2-A3DE07BF3BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F35184-75D0-4571-A5C2-A3DE07BF3BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F35184-75D0-4571-A5C2-A3DE07BF3BBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52E896F9-1A24-4C04-BFFF-F772B96B817C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E896F9-1A24-4C04-BFFF-F772B96B817C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E896F9-1A24-4C04-BFFF-F772B96B817C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E896F9-1A24-4C04-BFFF-F772B96B817C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF588E36-F087-4476-B7EF-CCD6EE917B3F}
+	EndGlobalSection
+EndGlobal

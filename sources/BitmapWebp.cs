@@ -21,8 +21,10 @@ namespace UMapx.Imaging
 
         #region | Public Decode Functions |
 
-        /// <summary>Decode a WebP image</summary>
-        /// <param name="rawWebP">The data to uncompress</param>
+        /// <summary>
+        /// Converts webp data to bitmap.
+        /// </summary>
+        /// <param name="rawWebP">Raw webp</param>
         /// <returns>Bitmap</returns>
         public static Bitmap FromWebp(this byte[] rawWebP)
         {
@@ -69,17 +71,22 @@ namespace UMapx.Imaging
 
         #region | Public Encode Functions |
 
-        /// <summary>Lossless encoding bitmap to WebP (Simple encoding API)</summary>
-        /// <param name="bmp">Bitmap</param>
-        /// <returns>Compressed data</returns>
-        public static byte[] ToWebp(this Bitmap bmp)
+        /// <summary>
+        /// Converts bitmap to webp format.
+        /// </summary>
+        /// <param name="bitmap">Bitmap</param>
+        /// <returns>Web data</returns>
+        /// <exception cref="ArgumentException">Argument exception</exception>
+        /// <exception cref="NotSupportedException">Not supported exception</exception>
+        /// <exception cref="Exception">Exception</exception>
+        public static byte[] ToWebp(this Bitmap bitmap)
         {
             //test bmp
-            if (bmp.Width == 0 || bmp.Height == 0)
+            if (bitmap.Width == 0 || bitmap.Height == 0)
                 throw new ArgumentException("Bitmap contains no data.", "bmp");
-            if (bmp.Width > WEBP_MAX_DIMENSION || bmp.Height > WEBP_MAX_DIMENSION)
+            if (bitmap.Width > WEBP_MAX_DIMENSION || bitmap.Height > WEBP_MAX_DIMENSION)
                 throw new NotSupportedException("Bitmap's dimension is too large. Max is " + WEBP_MAX_DIMENSION + "x" + WEBP_MAX_DIMENSION + " pixels.");
-            if (bmp.PixelFormat != PixelFormat.Format24bppRgb && bmp.PixelFormat != PixelFormat.Format32bppArgb)
+            if (bitmap.PixelFormat != PixelFormat.Format24bppRgb && bitmap.PixelFormat != PixelFormat.Format32bppArgb)
                 throw new NotSupportedException("Only support Format24bppRgb and Format32bppArgb pixelFormat.");
 
             BitmapData bmpData = null;
@@ -87,14 +94,14 @@ namespace UMapx.Imaging
             try
             {
                 //Get bmp data
-                bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, bmp.PixelFormat);
+                bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
                 //Compress the bmp data
                 int size;
-                if (bmp.PixelFormat == PixelFormat.Format24bppRgb)
-                    size = UnsafeNativeMethods.WebPEncodeLosslessBGR(bmpData.Scan0, bmp.Width, bmp.Height, bmpData.Stride, out unmanagedData);
+                if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
+                    size = UnsafeNativeMethods.WebPEncodeLosslessBGR(bmpData.Scan0, bitmap.Width, bitmap.Height, bmpData.Stride, out unmanagedData);
                 else
-                    size = UnsafeNativeMethods.WebPEncodeLosslessBGRA(bmpData.Scan0, bmp.Width, bmp.Height, bmpData.Stride, out unmanagedData);
+                    size = UnsafeNativeMethods.WebPEncodeLosslessBGRA(bmpData.Scan0, bitmap.Width, bitmap.Height, bmpData.Stride, out unmanagedData);
 
                 //Copy image compress data to output array
                 byte[] rawWebP = new byte[size];
@@ -107,20 +114,23 @@ namespace UMapx.Imaging
             {
                 //Unlock the pixels
                 if (bmpData != null)
-                    bmp.UnlockBits(bmpData);
+                    bitmap.UnlockBits(bmpData);
 
                 //Free memory
                 if (unmanagedData != IntPtr.Zero)
                     UnsafeNativeMethods.WebPFree(unmanagedData);
             }
         }
-        
-        /// <summary>Lossy encoding bitmap to WebP (Advanced encoding API)</summary>
-        /// <param name="bmp">Bitmap</param>
+
+        /// <summary>
+        /// Converts bitmap to webp format.
+        /// </summary>
+        /// <param name="bitmap">Bitmap</param>
         /// <param name="quality">Between 0 (lower quality, lowest file size) and 100 (highest quality, higher file size)</param>
         /// <param name="speed">Between 0 (fastest, lowest compression) and 9 (slower, best compression)</param>
-        /// <returns>Compressed data</returns>
-        public static byte[] ToWebp(this Bitmap bmp, int quality, int speed)
+        /// <returns></returns>
+        /// <exception cref="Exception">Exception</exception>
+        public static byte[] ToWebp(this Bitmap bitmap, int quality, int speed)
         {
             // Initialize configuration structure
             WebPConfig config = new WebPConfig();
@@ -154,7 +164,7 @@ namespace UMapx.Imaging
             else
                 config.preprocessing = 3;
 
-            return AdvancedEncode(bmp, config, false);
+            return AdvancedEncode(bitmap, config, false);
         }
 
         #endregion

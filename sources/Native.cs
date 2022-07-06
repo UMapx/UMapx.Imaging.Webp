@@ -432,7 +432,7 @@ namespace UMapx.Imaging
         private static extern int WebPEncodeBGR_x64([InAttribute()] IntPtr bgr, int width, int height, int stride, float quality_factor, out IntPtr output);
 
         /// <summary>Lossy encoding images</summary>
-        /// <param name="bgr">Pointer to BGRA image data</param>
+        /// <param name="bgra">Pointer to BGRA image data</param>
         /// <param name="width">The range is limited currently from 1 to 16383</param>
         /// <param name="height">The range is limited currently from 1 to 16383</param>
         /// <param name="stride">Specifies the distance between scan lines</param>

@@ -27,7 +27,7 @@ namespace UMapx.Imaging.Webp.Example
                     var webP = bitmap.ToWebp();
                     var filename = Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}.webp");
                     File.WriteAllBytes(filename, webP);
-                    Console.WriteLine($"Webp image save as {filename}");
+                    Console.WriteLine($"Image save as {filename}");
                 }
                 else if (file.EndsWith(".webp"))
                 {
@@ -36,7 +36,7 @@ namespace UMapx.Imaging.Webp.Example
                     using var jpeg = bitmap.ToJpeg();
                     var filename = Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}.jpg");
                     jpeg.Save(filename, ImageFormat.Jpeg);
-                    Console.WriteLine($"Jpeg image save as {filename}");
+                    Console.WriteLine($"Image save as {filename}");
                 }
                 else
                 {

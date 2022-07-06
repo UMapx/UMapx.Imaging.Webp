@@ -1,0 +1,890 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UMapx.Imaging.Webp</name>
+    </assembly>
+    <members>
+        <member name="T:UMapx.Imaging.BitmapWebp">
+            <summary>
+            Uses to work with webp bitmap format.
+            </summary>
+        </member>
+        <member name="F:UMapx.Imaging.BitmapWebp.WEBP_MAX_DIMENSION">
+            <summary>
+            WEBP_MAX_DIMENSION
+            </summary>
+        </member>
+        <member name="M:UMapx.Imaging.BitmapWebp.FromWebp(System.Byte[])">
+            <summary>
+            Converts webp data to bitmap.
+            </summary>
+            <param name="rawWebP">Raw webp</param>
+            <returns>Bitmap</returns>
+        </member>
+        <member name="M:UMapx.Imaging.BitmapWebp.ToWebp(System.Drawing.Bitmap)">
+            <summary>
+            Converts bitmap to webp format.
+            </summary>
+            <param name="bitmap">Bitmap</param>
+            <returns>Web data</returns>
+            <exception cref="T:System.ArgumentException">Argument exception</exception>
+            <exception cref="T:System.NotSupportedException">Not supported exception</exception>
+            <exception cref="T:System.Exception">Exception</exception>
+        </member>
+        <member name="M:UMapx.Imaging.BitmapWebp.ToWebp(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            Converts bitmap to webp format.
+            </summary>
+            <param name="bitmap">Bitmap</param>
+            <param name="quality">Between 0 (lower quality, lowest file size) and 100 (highest quality, higher file size)</param>
+            <param name="speed">Between 0 (fastest, lowest compression) and 9 (slower, best compression)</param>
+            <returns></returns>
+            <exception cref="T:System.Exception">Exception</exception>
+        </member>
+        <member name="M:UMapx.Imaging.BitmapWebp.GetWebpInfo(System.Byte[],System.Int32@,System.Int32@,System.Boolean@,System.Boolean@,System.String@)">
+            <summary>Get info of WEBP data</summary>
+            <param name="rawWebP">The data of WebP</param>
+            <param name="width">width of image</param>
+            <param name="height">height of image</param>
+            <param name="has_alpha">Image has alpha channel</param>
+            <param name="has_animation">Image is a animation</param>
+            <param name="format">Format of image: 0 = undefined (/mixed), 1 = lossy, 2 = lossless</param>
+        </member>
+        <member name="M:UMapx.Imaging.BitmapWebp.AdvancedEncode(System.Drawing.Bitmap,UMapx.Imaging.WebPConfig,System.Boolean)">
+            <summary>Encoding image  using Advanced encoding API</summary>
+            <param name="bmp">Bitmap with the image</param>
+            <param name="config">Configuration for encode</param>
+            <param name="info">True if need encode info.</param>
+            <returns>Compressed data</returns>
+        </member>
+        <member name="M:UMapx.Imaging.BitmapWebp.MyWriter(System.IntPtr,System.UIntPtr,UMapx.Imaging.WebPPicture@)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <param name="data_size"></param>
+            <param name="picture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UMapx.Imaging.BitmapWebp.MyWriterDelegate">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <param name="data_size"></param>
+            <param name="picture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPConfigInit(UMapx.Imaging.WebPConfig@,UMapx.Imaging.WebPPreset,System.Single)">
+            <summary>This function will initialize the configuration according to a predefined set of parameters (referred to by 'preset') and a given quality factor</summary>
+            <param name="config">The WebPConfig structure</param>
+            <param name="preset">Type of image</param>
+            <param name="quality">Quality of compression</param>
+            <returns>0 if error</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPGetFeatures(System.IntPtr,System.Int32,UMapx.Imaging.WebPBitstreamFeatures@)">
+            <summary>Get info of WepP image</summary>
+            <param name="rawWebP">Bytes[] of WebP image</param>
+            <param name="data_size">Size of rawWebP</param>
+            <param name="features">Features of WebP image</param>
+            <returns>VP8StatusCode</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPConfigLosslessPreset(UMapx.Imaging.WebPConfig@,System.Int32)">
+            <summary>Activate the lossless compression mode with the desired efficiency</summary>
+            <param name="config">The WebPConfig struct</param>
+            <param name="level">between 0 (fastest, lowest compression) and 9 (slower, best compression)</param>
+            <returns>0 in case of parameter error</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPValidateConfig(UMapx.Imaging.WebPConfig@)">
+            <summary>Check that configuration is non-NULL and all configuration parameters are within their valid ranges</summary>
+            <param name="config">The WebPConfig structure</param>
+            <returns>1 if configuration is OK</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPPictureInitInternal(UMapx.Imaging.WebPPicture@)">
+            <summary>Initialize the WebPPicture structure checking the DLL version</summary>
+            <param name="wpic">The WebPPicture structure</param>
+            <returns>1 if not error</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPPictureImportBGR(UMapx.Imaging.WebPPicture@,System.IntPtr,System.Int32)">
+            <summary>Colorspace conversion function to import RGB samples</summary>
+            <param name="wpic">The WebPPicture structure</param>
+            <param name="bgr">Point to BGR data</param>
+            <param name="stride">stride of BGR data</param>
+            <returns>Returns 0 in case of memory error.</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPPictureImportBGRA(UMapx.Imaging.WebPPicture@,System.IntPtr,System.Int32)">
+            <summary>Color-space conversion function to import RGB samples</summary>
+            <param name="wpic">The WebPPicture structure</param>
+            <param name="bgra">Point to BGRA data</param>
+            <param name="stride">stride of BGRA data</param>
+            <returns>Returns 0 in case of memory error.</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPPictureImportBGRX(UMapx.Imaging.WebPPicture@,System.IntPtr,System.Int32)">
+            <summary>Color-space conversion function to import RGB samples</summary>
+            <param name="wpic">The WebPPicture structure</param>
+            <param name="bgr">Point to BGR data</param>
+            <param name="stride">stride of BGR data</param>
+            <returns>Returns 0 in case of memory error.</returns>
+        </member>
+        <member name="T:UMapx.Imaging.UnsafeNativeMethods.WebPMemoryWrite">
+            <summary>The writer type for output compress data</summary>
+            <param name="data">Data returned</param>
+            <param name="data_size">Size of data returned</param>
+            <param name="wpic">Picture structure</param>
+            <returns></returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPEncode(UMapx.Imaging.WebPConfig@,UMapx.Imaging.WebPPicture@)">
+            <summary>Compress to WebP format</summary>
+            <param name="config">The configuration structure for compression parameters</param>
+            <param name="picture">'picture' hold the source samples in both YUV(A) or ARGB input</param>
+            <returns>Returns 0 in case of error, 1 otherwise. In case of error, picture->error_code is updated accordingly.</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPPictureFree(UMapx.Imaging.WebPPicture@)">
+            <summary>Release the memory allocated by WebPPictureAlloc() or WebPPictureImport*()
+            Note that this function does _not_ free the memory used by the 'picture' object itself.
+            Besides memory (which is reclaimed) all other fields of 'picture' are preserved</summary>
+            <param name="picture">Picture structure</param>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPGetInfo(System.IntPtr,System.Int32,System.Int32@,System.Int32@)">
+            <summary>Validate the WebP image header and retrieve the image height and width. Pointers *width and *height can be passed NULL if deemed irrelevant</summary>
+            <param name="data">Pointer to WebP image data</param>
+            <param name="data_size">This is the size of the memory block pointed to by data containing the image data</param>
+            <param name="width">The range is limited currently from 1 to 16383</param>
+            <param name="height">The range is limited currently from 1 to 16383</param>
+            <returns>1 if success, otherwise error code returned in the case of (a) formatting error(s).</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPDecodeBGRInto(System.IntPtr,System.Int32,System.IntPtr,System.Int32,System.Int32)">
+            <summary>Decode WEBP image pointed to by *data and returns BGR samples into a preallocated buffer</summary>
+            <param name="data">Pointer to WebP image data</param>
+            <param name="data_size">This is the size of the memory block pointed to by data containing the image data</param>
+            <param name="output_buffer">Pointer to decoded WebP image</param>
+            <param name="output_buffer_size">Size of allocated buffer</param>
+            <param name="output_stride">Specifies the distance between scan lines</param>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPDecodeBGRAInto(System.IntPtr,System.Int32,System.IntPtr,System.Int32,System.Int32)">
+            <summary>Decode WEBP image pointed to by *data and returns BGRA samples into a preallocated buffer</summary>
+            <param name="data">Pointer to WebP image data</param>
+            <param name="data_size">This is the size of the memory block pointed to by data containing the image data</param>
+            <param name="output_buffer">Pointer to decoded WebP image</param>
+            <param name="output_buffer_size">Size of allocated buffer</param>
+            <param name="output_stride">Specifies the distance between scan lines</param>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPDecodeARGBInto(System.IntPtr,System.Int32,System.IntPtr,System.Int32,System.Int32)">
+            <summary>Decode WEBP image pointed to by *data and returns ARGB samples into a preallocated buffer</summary>
+            <param name="data">Pointer to WebP image data</param>
+            <param name="data_size">This is the size of the memory block pointed to by data containing the image data</param>
+            <param name="output_buffer">Pointer to decoded WebP image</param>
+            <param name="output_buffer_size">Size of allocated buffer</param>
+            <param name="output_stride">Specifies the distance between scan lines</param>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPInitDecoderConfig(UMapx.Imaging.WebPDecoderConfig@)">
+            <summary>Initialize the configuration as empty. This function must always be called first, unless WebPGetFeatures() is to be called</summary>
+            <param name="webPDecoderConfig">Configuration structure</param>
+            <returns>False in case of mismatched version.</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPDecode(System.IntPtr,System.Int32,UMapx.Imaging.WebPDecoderConfig@)">
+            <summary>Decodes the full data at once, taking configuration into account</summary>
+            <param name="data">WebP raw data to decode</param>
+            <param name="data_size">Size of WebP data </param>
+            <param name="webPDecoderConfig">Configuration structure</param>
+            <returns>VP8_STATUS_OK if the decoding was successful</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPFreeDecBuffer(UMapx.Imaging.WebPDecBuffer@)">
+            <summary>Free any memory associated with the buffer. Must always be called last. Doesn't free the 'buffer' structure itself</summary>
+            <param name="buffer">WebPDecBuffer</param>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPEncodeBGR(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Single,System.IntPtr@)">
+            <summary>Lossy encoding images</summary>
+            <param name="bgr">Pointer to BGR image data</param>
+            <param name="width">The range is limited currently from 1 to 16383</param>
+            <param name="height">The range is limited currently from 1 to 16383</param>
+            <param name="stride">Specifies the distance between scanlines</param>
+            <param name="quality_factor">Ranges from 0 (lower quality) to 100 (highest quality). Controls the loss and quality during compression</param>
+            <param name="output">output_buffer with WebP image</param>
+            <returns>Size of WebP Image or 0 if an error occurred</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPEncodeBGRA(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Single,System.IntPtr@)">
+            <summary>Lossy encoding images</summary>
+            <param name="bgra">Pointer to BGRA image data</param>
+            <param name="width">The range is limited currently from 1 to 16383</param>
+            <param name="height">The range is limited currently from 1 to 16383</param>
+            <param name="stride">Specifies the distance between scan lines</param>
+            <param name="quality_factor">Ranges from 0 (lower quality) to 100 (highest quality). Controls the loss and quality during compression</param>
+            <param name="output">output_buffer with WebP image</param>
+            <returns>Size of WebP Image or 0 if an error occurred</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPEncodeLosslessBGR(System.IntPtr,System.Int32,System.Int32,System.Int32,System.IntPtr@)">
+            <summary>Lossless encoding images pointed to by *data in WebP format</summary>
+            <param name="bgr">Pointer to BGR image data</param>
+            <param name="width">The range is limited currently from 1 to 16383</param>
+            <param name="height">The range is limited currently from 1 to 16383</param>
+            <param name="stride">Specifies the distance between scan lines</param>
+            <param name="output">output_buffer with WebP image</param>
+            <returns>Size of WebP Image or 0 if an error occurred</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPEncodeLosslessBGRA(System.IntPtr,System.Int32,System.Int32,System.Int32,System.IntPtr@)">
+            <summary>Lossless encoding images pointed to by *data in WebP format</summary>
+            <param name="bgra">Pointer to BGRA image data</param>
+            <param name="width">The range is limited currently from 1 to 16383</param>
+            <param name="height">The range is limited currently from 1 to 16383</param>
+            <param name="stride">Specifies the distance between scan lines</param>
+            <param name="output">output_buffer with WebP image</param>
+            <returns>Size of WebP Image or 0 if an error occurred</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPFree(System.IntPtr)">
+            <summary>Releases memory returned by the WebPEncode</summary>
+            <param name="p">Pointer to memory</param>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPGetDecoderVersion">
+            <summary>Get the WebP version library</summary>
+            <returns>8bits for each of major/minor/revision packet in integer. E.g: v2.5.7 is 0x020507</returns>
+        </member>
+        <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPPictureDistortion(UMapx.Imaging.WebPPicture@,UMapx.Imaging.WebPPicture@,System.Int32,System.IntPtr)">
+            <summary>Compute PSNR, SSIM or LSIM distortion metric between two pictures</summary>
+            <param name="srcPicture">Picture to measure</param>
+            <param name="refPicture">Reference picture</param>
+            <param name="metric_type">0 = PSNR, 1 = SSIM, 2 = LSIM</param>
+            <param name="pResult">dB in the Y/U/V/Alpha/All order</param>
+            <returns>False in case of error (the two pictures don't have same dimension, ...)</returns>
+        </member>
+        <member name="T:UMapx.Imaging.WebPPreset">
+            <summary>Enumerate some predefined settings for WebPConfig, depending on the type of source picture. These presets are used when calling WebPConfigPreset()</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPreset.WEBP_PRESET_DEFAULT">
+            <summary>Default preset</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPreset.WEBP_PRESET_PICTURE">
+            <summary>Digital picture, like portrait, inner shot</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPreset.WEBP_PRESET_PHOTO">
+            <summary>Outdoor photograph, with natural lighting</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPreset.WEBP_PRESET_DRAWING">
+            <summary>Hand or line drawing, with high-contrast details</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPreset.WEBP_PRESET_ICON">
+            <summary>Small-sized colorful images</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPreset.WEBP_PRESET_TEXT">
+            <summary>Text-like</summary>
+        </member>
+        <member name="T:UMapx.Imaging.WebPEncodingError">
+            <summary>Encoding error conditions</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_OK">
+            <summary>No error</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_ERROR_OUT_OF_MEMORY">
+            <summary>Memory error allocating objects</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_ERROR_BITSTREAM_OUT_OF_MEMORY">
+            <summary>Memory error while flushing bits</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_ERROR_NULL_PARAMETER">
+            <summary>A pointer parameter is NULL</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_ERROR_INVALID_CONFIGURATION">
+            <summary>Configuration is invalid</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_ERROR_BAD_DIMENSION">
+            <summary>Picture has invalid width/height</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_ERROR_PARTITION0_OVERFLOW">
+            <summary>Partition is bigger than 512k</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_ERROR_PARTITION_OVERFLOW">
+            <summary>Partition is bigger than 16M</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_ERROR_BAD_WRITE">
+            <summary>Error while flushing bytes</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_ERROR_FILE_TOO_BIG">
+            <summary>File is bigger than 4G</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_ERROR_USER_ABORT">
+            <summary>Abort request by user</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPEncodingError.VP8_ENC_ERROR_LAST">
+            <summary>List terminator. Always last</summary>
+        </member>
+        <member name="T:UMapx.Imaging.VP8StatusCode">
+            <summary>Enumeration of the status codes</summary>
+        </member>
+        <member name="F:UMapx.Imaging.VP8StatusCode.VP8_STATUS_OK">
+            <summary>No error</summary>
+        </member>
+        <member name="F:UMapx.Imaging.VP8StatusCode.VP8_STATUS_OUT_OF_MEMORY">
+            <summary>Memory error allocating objects</summary>
+        </member>
+        <member name="F:UMapx.Imaging.VP8StatusCode.VP8_STATUS_INVALID_PARAM">
+            <summary>Configuration is invalid</summary>
+        </member>
+        <member name="F:UMapx.Imaging.VP8StatusCode.VP8_STATUS_UNSUPPORTED_FEATURE">
+            <summary>Configuration is invalid</summary>
+        </member>
+        <member name="F:UMapx.Imaging.VP8StatusCode.VP8_STATUS_USER_ABORT">
+            <summary>Abort request by user</summary>
+        </member>
+        <member name="T:UMapx.Imaging.WebPImageHint">
+            <summary>Image characteristics hint for the underlying encoder</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPImageHint.WEBP_HINT_DEFAULT">
+            <summary>Default preset</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPImageHint.WEBP_HINT_PICTURE">
+            <summary>Digital picture, like portrait, inner shot</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPImageHint.WEBP_HINT_PHOTO">
+            <summary>Outdoor photograph, with natural lighting</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPImageHint.WEBP_HINT_GRAPH">
+            <summary>Discrete tone image (graph, map-tile etc)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPImageHint.WEBP_HINT_LAST">
+            <summary>List terminator. Always last</summary>
+        </member>
+        <member name="T:UMapx.Imaging.WEBP_CSP_MODE">
+            <summary>Describes the byte-ordering of packed samples in memory</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_RGB">
+            <summary>Byte-order: R,G,B,R,G,B,..</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_RGBA">
+            <summary>Byte-order: R,G,B,A,R,G,B,A,..</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_BGR">
+            <summary>Byte-order: B,G,R,B,G,R,..</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_BGRA">
+            <summary>Byte-order: B,G,R,A,B,G,R,A,..</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_ARGB">
+            <summary>Byte-order: A,R,G,B,A,R,G,B,..</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_RGBA_4444">
+            <summary>Byte-order: RGB-565: [a4 a3 a2 a1 a0 r5 r4 r3], [r2 r1 r0 g4 g3 g2 g1 g0], ...
+            WEBP_SWAP_16BITS_CSP is defined, 
+            Byte-order: RGB-565: [a4 a3 a2 a1 a0 b5 b4 b3], [b2 b1 b0 g4 g3 g2 g1 g0], ..</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_RGB_565">
+            <summary>Byte-order: RGB-565: [r4 r3 r2 r1 r0 g5 g4 g3], [g2 g1 g0 b4 b3 b2 b1 b0], ...
+            WEBP_SWAP_16BITS_CSP is defined, 
+            Byte-order: [b3 b2 b1 b0 a3 a2 a1 a0], [r3 r2 r1 r0 g3 g2 g1 g0], ..</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_rgbA">
+            <summary>RGB-premultiplied transparent modes (alpha value is preserved)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_bgrA">
+            <summary>RGB-premultiplied transparent modes (alpha value is preserved)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_Argb">
+            <summary>RGB-premultiplied transparent modes (alpha value is preserved)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_rgbA_4444">
+            <summary>RGB-premultiplied transparent modes (alpha value is preserved)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_YUV">
+            <summary>YUV 4:2:0</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_YUVA">
+            <summary>YUV 4:2:0</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WEBP_CSP_MODE.MODE_LAST">
+            <summary>MODE_LAST -> 13</summary>
+        </member>
+        <member name="T:UMapx.Imaging.DecState">
+            <summary>
+            Decoding states. State normally flows as:
+            WEBP_HEADER->VP8_HEADER->VP8_PARTS0->VP8_DATA->DONE for a lossy image, and
+            WEBP_HEADER->VP8L_HEADER->VP8L_DATA->DONE for a lossless image.
+            If there is any error the decoder goes into state ERROR.
+            </summary>
+        </member>
+        <member name="T:UMapx.Imaging.WebPBitstreamFeatures">
+            <summary>Features gathered from the bit stream</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPBitstreamFeatures.Width">
+            <summary>Width in pixels, as read from the bit stream</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPBitstreamFeatures.Height">
+            <summary>Height in pixels, as read from the bit stream</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPBitstreamFeatures.Has_alpha">
+            <summary>True if the bit stream contains an alpha channel</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPBitstreamFeatures.Has_animation">
+            <summary>True if the bit stream is an animation</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPBitstreamFeatures.Format">
+            <summary>0 = undefined (/mixed), 1 = lossy, 2 = lossless</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPBitstreamFeatures.pad">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="T:UMapx.Imaging.WebPConfig">
+            <summary>Compression parameters</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.lossless">
+            <summary>Lossless encoding (0=lossy(default), 1=lossless)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.quality">
+            <summary>Between 0 (smallest file) and 100 (biggest)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.method">
+            <summary>Quality/speed trade-off (0=fast, 6=slower-better)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.image_hint">
+            <summary>Hint for image type (lossless only for now)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.target_size">
+            <summary>If non-zero, set the desired target size in bytes. Takes precedence over the 'compression' parameter</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.target_PSNR">
+            <summary>If non-zero, specifies the minimal distortion to try to achieve. Takes precedence over target_size</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.segments">
+            <summary>Maximum number of segments to use, in [1..4]</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.sns_strength">
+            <summary>Spatial Noise Shaping. 0=off, 100=maximum</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.filter_strength">
+            <summary>Range: [0 = off .. 100 = strongest]</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.filter_sharpness">
+            <summary>Range: [0 = off .. 7 = least sharp]</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.filter_type">
+            <summary>Filtering type: 0 = simple, 1 = strong (only used if filter_strength > 0 or auto-filter > 0)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.autofilter">
+            <summary>Auto adjust filter's strength [0 = off, 1 = on]</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.alpha_compression">
+            <summary>Algorithm for encoding the alpha plane (0 = none, 1 = compressed with WebP lossless). Default is 1</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.alpha_filtering">
+            <summary>Predictive filtering method for alpha plane. 0: none, 1: fast, 2: best. Default if 1</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.alpha_quality">
+            <summary>Between 0 (smallest size) and 100 (lossless). Default is 100</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.pass">
+            <summary>Number of entropy-analysis passes (in [1..10])</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.show_compressed">
+            <summary>If true, export the compressed picture back. In-loop filtering is not applied</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.preprocessing">
+            <summary>Preprocessing filter (0=none, 1=segment-smooth, 2=pseudo-random dithering)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.partitions">
+            <summary>Log2(number of token partitions) in [0..3] Default is set to 0 for easier progressive decoding</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.partition_limit">
+            <summary>Quality degradation allowed to fit the 512k limit on prediction modes coding (0: no degradation, 100: maximum possible degradation)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.emulate_jpeg_size">
+            <summary>If true, compression parameters will be remapped to better match the expected output size from JPEG compression. Generally, the output size will be similar but the degradation will be lower</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.thread_level">
+            <summary>If non-zero, try and use multi-threaded encoding</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.low_memory">
+            <summary>If set, reduce memory usage (but increase CPU use)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.near_lossless">
+            <summary>Near lossless encoding [0 = max loss .. 100 = off (default)]</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.exact">
+            <summary>If non-zero, preserve the exact RGB values under transparent area. Otherwise, discard this invisible RGB information for better compression. The default value is 0</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.delta_palettization">
+            <summary>Reserved for future lossless feature</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.use_sharp_yuv">
+            <summary>If needed, use sharp (and slow) RGB->YUV conversion</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.pad1">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="T:UMapx.Imaging.WebPPicture">
+            <summary>Main exchange structure (input samples, output bytes, statistics)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.use_argb">
+            <summary>Main flag for encoder selecting between ARGB or YUV input. Recommended to use ARGB input (*argb, argb_stride) for lossless, and YUV input (*y, *u, *v, etc.) for lossy</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.colorspace">
+            <summary>Color-space: should be YUV420 for now (=Y'CbCr). Value = 0</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.width">
+            <summary>Width of picture (less or equal to WEBP_MAX_DIMENSION)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.height">
+            <summary>Height of picture (less or equal to WEBP_MAX_DIMENSION)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.y">
+            <summary>Pointer to luma plane</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.u">
+            <summary>Pointer to chroma U plane</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.v">
+            <summary>Pointer to chroma V plane</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.y_stride">
+            <summary>Luma stride</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.uv_stride">
+            <summary>Chroma stride</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.a">
+            <summary>Pointer to the alpha plane</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.a_stride">
+            <summary>stride of the alpha plane</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.pad1">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.argb">
+            <summary>Pointer to ARGB (32 bit) plane</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.argb_stride">
+            <summary>This is stride in pixels units, not bytes</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.pad2">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.writer">
+            <summary>Byte-emission hook, to store compressed bytes as they are ready</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.custom_ptr">
+            <summary>Can be used by the writer</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.extra_info_type">
+            <summary>1: intra type, 2: segment, 3: quant, 4: intra-16 prediction mode, 5: chroma prediction mode, 6: bit cost, 7: distortion</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.extra_info">
+            <summary>If not NULL, points to an array of size ((width + 15) / 16) * ((height + 15) / 16) that will be filled with a macroblock map, depending on extra_info_type</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.stats">
+            <summary>Pointer to side statistics (updated only if not NULL)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.error_code">
+            <summary>Error code for the latest error encountered during encoding</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.progress_hook">
+            <summary>If not NULL, report progress during encoding</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.user_data">
+            <summary>This field is free to be set to any value and used during callbacks (like progress-report e.g.)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.pad3">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.memory_">
+            <summary>Row chunk of memory for YUVA planes</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.memory_argb_">
+            <summary>Row chunk of memory for ARGB planes</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPPicture.pad4">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="T:UMapx.Imaging.WebPAuxStats">
+            <summary>Structure for storing auxiliary statistics (mostly for lossy encoding)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.coded_size">
+            <summary>Final size</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.PSNRY">
+            <summary>Peak-signal-to-noise ratio for Y</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.PSNRU">
+            <summary>Peak-signal-to-noise ratio for U</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.PSNRV">
+            <summary>Peak-signal-to-noise ratio for V</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.PSNRALL">
+            <summary>Peak-signal-to-noise ratio for All</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.PSNRAlpha">
+            <summary>Peak-signal-to-noise ratio for Alpha</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.block_count_intra4">
+            <summary>Number of intra4</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.block_count_intra16">
+            <summary>Number of intra16</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.block_count_skipped">
+            <summary>Number of skipped macro-blocks</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.header_bytes">
+            <summary>Approximate number of bytes spent for header</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.mode_partition_0">
+            <summary>Approximate number of bytes spent for  mode-partition #0</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_DC_segments0">
+            <summary>Approximate number of bytes spent for DC coefficients for segment 0</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_AC_segments0">
+            <summary>Approximate number of bytes spent for AC coefficients for segment 0</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_uv_segments0">
+            <summary>Approximate number of bytes spent for UV coefficients for segment 0</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_DC_segments1">
+            <summary>Approximate number of bytes spent for DC coefficients for segment 1</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_AC_segments1">
+            <summary>Approximate number of bytes spent for AC coefficients for segment 1</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_uv_segments1">
+            <summary>Approximate number of bytes spent for UV coefficients for segment 1</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_DC_segments2">
+            <summary>Approximate number of bytes spent for DC coefficients for segment 2</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_AC_segments2">
+            <summary>Approximate number of bytes spent for AC coefficients for segment 2</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_uv_segments2">
+            <summary>Approximate number of bytes spent for UV coefficients for segment 2</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_DC_segments3">
+            <summary>Approximate number of bytes spent for DC coefficients for segment 3</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_AC_segments3">
+            <summary>Approximate number of bytes spent for AC coefficients for segment 3</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.residual_bytes_uv_segments3">
+            <summary>Approximate number of bytes spent for UV coefficients for segment 3</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_size_segments0">
+            <summary>Number of macro-blocks in segments 0</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_size_segments1">
+            <summary>Number of macro-blocks in segments 1</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_size_segments2">
+            <summary>Number of macro-blocks in segments 2</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_size_segments3">
+            <summary>Number of macro-blocks in segments 3</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_quant_segments0">
+            <summary>Quantizer values for segment 0</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_quant_segments1">
+            <summary>Quantizer values for segment 1</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_quant_segments2">
+            <summary>Quantizer values for segment 2</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_quant_segments3">
+            <summary>Quantizer values for segment 3</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_level_segments0">
+            <summary>Filtering strength for segment 0 [0..63]</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_level_segments1">
+            <summary>Filtering strength for segment 1 [0..63]</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_level_segments2">
+            <summary>Filtering strength for segment 2 [0..63]</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.segment_level_segments3">
+            <summary>Filtering strength for segment 3 [0..63]</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.alpha_data_size">
+            <summary>Size of the transparency data</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.layer_data_size">
+            <summary>Size of the enhancement layer data</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.lossless_features">
+            <summary>bit0:predictor bit1:cross-color transform bit2:subtract-green bit3:color indexing</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.histogram_bits">
+            <summary>Number of precision bits of histogram</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.transform_bits">
+            <summary>Precision bits for transform</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.cache_bits">
+            <summary>Number of bits for color cache lookup</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.palette_size">
+            <summary>Number of color in palette, if used</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.lossless_size">
+            <summary>Final lossless size</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.lossless_hdr_size">
+            <summary>Lossless header (transform, Huffman, etc) size</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.lossless_data_size">
+            <summary>Lossless image data size</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPAuxStats.pad">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderConfig.input">
+            <summary>Immutable bit stream features (optional)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderConfig.output">
+            <summary>Output buffer (can point to external memory)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderConfig.options">
+            <summary>Decoding options</summary>
+        </member>
+        <member name="T:UMapx.Imaging.WebPDecBuffer">
+            <summary>Output buffer</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecBuffer.colorspace">
+            <summary>Color space</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecBuffer.width">
+            <summary>Width of image</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecBuffer.height">
+            <summary>Height of image</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecBuffer.is_external_memory">
+            <summary>If non-zero, 'internal_memory' pointer is not used. If value is '2' or more, the external memory is considered 'slow' and multiple read/write will be avoided</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecBuffer.u">
+            <summary>Output buffer parameters</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecBuffer.pad1">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecBuffer.pad2">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecBuffer.pad3">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecBuffer.pad4">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecBuffer.private_memory">
+            <summary>Internally allocated memory (only when is_external_memory is 0). Should not be used externally, but accessed via WebPRGBABuffer</summary>
+        </member>
+        <member name="T:UMapx.Imaging.RGBA_YUVA_Buffer">
+            <summary>Union of buffer parameters</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.y">
+            <summary>Pointer to luma samples</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.u">
+            <summary>Pointer to chroma U samples</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.v">
+            <summary>Pointer to chroma V samples</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.a">
+            <summary>Pointer to alpha samples</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.y_stride">
+            <summary>Luma stride</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.u_stride">
+            <summary>Chroma U stride</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.v_stride">
+            <summary>Chroma V stride</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.a_stride">
+            <summary>Alpha stride</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.y_size">
+            <summary>Luma plane size</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.u_size">
+            <summary>Chroma plane U size</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.v_size">
+            <summary>Chroma plane V size</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPYUVABuffer.a_size">
+            <summary>Alpha plane size</summary>
+        </member>
+        <member name="T:UMapx.Imaging.WebPRGBABuffer">
+            <summary>Generic structure for describing the output sample buffer</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPRGBABuffer.rgba">
+            <summary>Pointer to RGBA samples</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPRGBABuffer.stride">
+            <summary>Stride in bytes from one scanline to the next</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPRGBABuffer.size">
+            <summary>Total size of the RGBA buffer</summary>
+        </member>
+        <member name="T:UMapx.Imaging.WebPDecoderOptions">
+            <summary>Decoding options</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.bypass_filtering">
+            <summary>If true, skip the in-loop filtering</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.no_fancy_upsampling">
+            <summary>If true, use faster point-wise up-sampler</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.use_cropping">
+            <summary>If true, cropping is applied _first_</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.crop_left">
+            <summary>Left position for cropping. Will be snapped to even values</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.crop_top">
+            <summary>Top position for cropping. Will be snapped to even values</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.crop_width">
+            <summary>Width of the cropping area</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.crop_height">
+            <summary>Height of the cropping area</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.use_scaling">
+            <summary>If true, scaling is applied _afterward_</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.scaled_width">
+            <summary>Final width</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.scaled_height">
+            <summary>Final height</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.use_threads">
+            <summary>If true, use multi-threaded decoding</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.dithering_strength">
+            <summary>Dithering strength (0=Off, 100=full)</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.flip">
+            <summary>Flip output vertically</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.alpha_dithering_strength">
+            <summary>Alpha dithering strength in [0..100]</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.pad1">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.pad2">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.pad3">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.pad4">
+            <summary>Padding for later use</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPDecoderOptions.pad5">
+            <summary>Padding for later use</summary>
+        </member>
+    </members>
+</doc>

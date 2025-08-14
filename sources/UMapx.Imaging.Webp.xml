@@ -6,7 +6,7 @@
     <members>
         <member name="T:UMapx.Imaging.BitmapWebp">
             <summary>
-            Uses to work with webp bitmap format.
+            Used to work with webp bitmap format.
             </summary>
         </member>
         <member name="F:UMapx.Imaging.BitmapWebp.WEBP_MAX_DIMENSION">

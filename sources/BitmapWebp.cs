@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace UMapx.Imaging
 {
     /// <summary>
-    /// Uses to work with webp bitmap format.
+    /// Used to work with webp bitmap format.
     /// </summary>
     public static class BitmapWebp
     {

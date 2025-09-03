@@ -124,7 +124,7 @@ namespace UMapx.Imaging
         /// <param name="wpic">The WebPPicture structure</param>
         /// <param name="bgr">Point to BGR data</param>
         /// <param name="stride">stride of BGR data</param>
-        /// <returns>Returns 0 in case of memory error.</returns>
+        /// <returns>Returns 0 in case of memory error</returns>
         internal static int WebPPictureImportBGR(ref WebPPicture wpic, IntPtr bgr, int stride)
         {
             switch (IntPtr.Size)
@@ -146,7 +146,7 @@ namespace UMapx.Imaging
         /// <param name="wpic">The WebPPicture structure</param>
         /// <param name="bgra">Point to BGRA data</param>
         /// <param name="stride">stride of BGRA data</param>
-        /// <returns>Returns 0 in case of memory error.</returns>
+        /// <returns>Returns 0 in case of memory error</returns>
         internal static int WebPPictureImportBGRA(ref WebPPicture wpic, IntPtr bgra, int stride)
         {
             switch (IntPtr.Size)
@@ -168,7 +168,7 @@ namespace UMapx.Imaging
         /// <param name="wpic">The WebPPicture structure</param>
         /// <param name="bgr">Point to BGR data</param>
         /// <param name="stride">stride of BGR data</param>
-        /// <returns>Returns 0 in case of memory error.</returns>
+        /// <returns>Returns 0 in case of memory error</returns>
         internal static int WebPPictureImportBGRX(ref WebPPicture wpic, IntPtr bgr, int stride)
         {
             switch (IntPtr.Size)
@@ -198,7 +198,7 @@ namespace UMapx.Imaging
         /// <summary>Compress to WebP format</summary>
         /// <param name="config">The configuration structure for compression parameters</param>
         /// <param name="picture">'picture' hold the source samples in both YUV(A) or ARGB input</param>
-        /// <returns>Returns 0 in case of error, 1 otherwise. In case of error, picture->error_code is updated accordingly.</returns>
+        /// <returns>Returns 0 in case of error, 1 otherwise. In case of error, picture->error_code is updated accordingly</returns>
         internal static int WebPEncode(ref WebPConfig config, ref WebPPicture picture)
         {
             switch (IntPtr.Size)
@@ -244,7 +244,7 @@ namespace UMapx.Imaging
         /// <param name="data_size">This is the size of the memory block pointed to by data containing the image data</param>
         /// <param name="width">The range is limited currently from 1 to 16383</param>
         /// <param name="height">The range is limited currently from 1 to 16383</param>
-        /// <returns>1 if success, otherwise error code returned in the case of (a) formatting error(s).</returns>
+        /// <returns>1 if success, otherwise error code returned in the case of (a) formatting error(s)</returns>
         internal static int WebPGetInfo(IntPtr data, int data_size, out int width, out int height)
         {
             switch (IntPtr.Size)
@@ -345,7 +345,7 @@ namespace UMapx.Imaging
 
         /// <summary>Initialize the configuration as empty. This function must always be called first, unless WebPGetFeatures() is to be called</summary>
         /// <param name="webPDecoderConfig">Configuration structure</param>
-        /// <returns>False in case of mismatched version.</returns>
+        /// <returns>False in case of mismatched version</returns>
         internal static int WebPInitDecoderConfig(ref WebPDecoderConfig webPDecoderConfig)
         {
             switch (IntPtr.Size)

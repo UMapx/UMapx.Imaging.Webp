@@ -222,7 +222,7 @@ namespace UMapx.Imaging
         /// <summary>Encoding image  using Advanced encoding API</summary>
         /// <param name="bmp">Bitmap with the image</param>
         /// <param name="config">Configuration for encode</param>
-        /// <param name="info">True if need encode info.</param>
+        /// <param name="info">True if need encode info</param>
         /// <returns>Compressed data</returns>
         private static byte[] AdvancedEncode(this Bitmap bmp, WebPConfig config, bool info)
         {

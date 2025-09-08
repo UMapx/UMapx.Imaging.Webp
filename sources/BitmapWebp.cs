@@ -83,11 +83,11 @@ namespace UMapx.Imaging
         {
             //test bmp
             if (bitmap.Width == 0 || bitmap.Height == 0)
-                throw new ArgumentException("Bitmap contains no data.", "bmp");
+                throw new ArgumentException("Bitmap contains no data", "bmp");
             if (bitmap.Width > WEBP_MAX_DIMENSION || bitmap.Height > WEBP_MAX_DIMENSION)
-                throw new NotSupportedException("Bitmap's dimension is too large. Max is " + WEBP_MAX_DIMENSION + "x" + WEBP_MAX_DIMENSION + " pixels.");
+                throw new NotSupportedException("Bitmap's dimension is too large. Max is " + WEBP_MAX_DIMENSION + "x" + WEBP_MAX_DIMENSION + " pixels");
             if (bitmap.PixelFormat != PixelFormat.Format24bppRgb && bitmap.PixelFormat != PixelFormat.Format32bppArgb)
-                throw new NotSupportedException("Only support Format24bppRgb and Format32bppArgb pixelFormat.");
+                throw new NotSupportedException("Only support Format24bppRgb and Format32bppArgb pixelFormat");
 
             BitmapData bmpData = null;
             IntPtr unmanagedData = IntPtr.Zero;
@@ -242,11 +242,11 @@ namespace UMapx.Imaging
 
                 //test bmp
                 if (bmp.Width == 0 || bmp.Height == 0)
-                    throw new ArgumentException("Bitmap contains no data.", "bmp");
+                    throw new ArgumentException("Bitmap contains no data", "bmp");
                 if (bmp.Width > WEBP_MAX_DIMENSION || bmp.Height > WEBP_MAX_DIMENSION)
-                    throw new NotSupportedException("Bitmap's dimension is too large. Max is " + WEBP_MAX_DIMENSION + "x" + WEBP_MAX_DIMENSION + " pixels.");
+                    throw new NotSupportedException("Bitmap's dimension is too large. Max is " + WEBP_MAX_DIMENSION + "x" + WEBP_MAX_DIMENSION + " pixels");
                 if (bmp.PixelFormat != PixelFormat.Format24bppRgb && bmp.PixelFormat != PixelFormat.Format32bppArgb)
-                    throw new NotSupportedException("Only support Format24bppRgb and Format32bppArgb pixelFormat.");
+                    throw new NotSupportedException("Only support Format24bppRgb and Format32bppArgb pixelFormat");
 
                 // Setup the input data, allocating a the bitmap, width and height
                 bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, bmp.PixelFormat);

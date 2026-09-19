@@ -842,15 +842,20 @@ namespace UMapx.Imaging
         /// <summary>This field is free to be set to any value and used during callbacks (like progress-report e.g.)</summary>
         public IntPtr user_data;
         /// <summary>Padding for later use</summary>
-        [MarshalAsAttribute(UnmanagedType.ByValArray, SizeConst = 13, ArraySubType = UnmanagedType.U4)]
+        [MarshalAsAttribute(UnmanagedType.ByValArray, SizeConst = 3, ArraySubType = UnmanagedType.U4)]
         private readonly uint[] pad3;
+        // Reserved pointers must retain their native width on both x86 and x64.
+        private readonly IntPtr pad4;
+        private readonly IntPtr pad5;
+        [MarshalAsAttribute(UnmanagedType.ByValArray, SizeConst = 8, ArraySubType = UnmanagedType.U4)]
+        private readonly uint[] pad6;
         /// <summary>Row chunk of memory for YUVA planes</summary>
         private readonly IntPtr memory_;
         /// <summary>Row chunk of memory for ARGB planes</summary>
         private readonly IntPtr memory_argb_;
         /// <summary>Padding for later use</summary>
-        [MarshalAsAttribute(UnmanagedType.ByValArray, SizeConst = 2, ArraySubType = UnmanagedType.U4)]
-        private readonly uint[] pad4;
+        [MarshalAsAttribute(UnmanagedType.ByValArray, SizeConst = 2, ArraySubType = UnmanagedType.SysInt)]
+        private readonly IntPtr[] pad7;
     };
 
     /// <summary>Structure for storing auxiliary statistics (mostly for lossy encoding)</summary>

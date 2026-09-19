@@ -38,6 +38,26 @@ public class BitmapWebpTests
         Assert.Equal(0x010600, IntPtr.Size == 8 ? Version64() : Version86());
     }
 
+    // ABI sizes and offsets from libwebp 1.6.0's src/webp/encode.h and decode.h.
+    [Theory]
+    [InlineData("WebPPicture", 172, 256)]
+    [InlineData("WebPConfig", 116, 116)]
+    [InlineData("WebPBitstreamFeatures", 40, 40)]
+    public void NativeStructureSizeMatchesLibwebpAbi(string name, int size32, int size64)
+    {
+        Type type = typeof(BitmapWebp).Assembly.GetType("UMapx.Imaging." + name, throwOnError: true)!;
+        Assert.Equal(IntPtr.Size == 8 ? size64 : size32, Marshal.SizeOf(type));
+    }
+
+    [Theory]
+    [InlineData("memory_", 156, 224)]
+    [InlineData("memory_argb_", 160, 232)]
+    public void NativePictureMemoryOffsetMatchesLibwebpAbi(string field, int offset32, int offset64)
+    {
+        Type type = typeof(BitmapWebp).Assembly.GetType("UMapx.Imaging.WebPPicture", throwOnError: true)!;
+        Assert.Equal(IntPtr.Size == 8 ? offset64 : offset32, Marshal.OffsetOf(type, field).ToInt32());
+    }
+
     [Theory, MemberData(nameof(ImageCases))]
     public void LosslessRoundtripPreservesPixels(int size, PixelFormat format)
     {

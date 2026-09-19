@@ -64,7 +64,7 @@
 
 	<ItemGroup>
 		<None Include="../README.md" Pack="true" PackagePath="/" />
-		<None Include="../third-party/libwebp/*" Pack="true" PackagePath="third-party/libwebp/" />
+		<None Include="../libwebp/*" Pack="true" PackagePath="libwebp/" />
 		<None Include="LICENSE.md">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>

@@ -51,7 +51,7 @@ try {
     foreach ($architecture in @('x64', 'x86')) {
         Copy-Item -LiteralPath (Join-Path $work "libwebp_$architecture.dll") -Destination (Join-Path $repo "sources/libwebp_$architecture.dll")
     }
-    $notices = Join-Path $repo 'third-party/libwebp'
+    $notices = Join-Path $repo 'libwebp'
     New-Item -ItemType Directory -Path $notices -Force | Out-Null
     foreach ($file in @('COPYING', 'PATENTS', 'AUTHORS')) {
         Copy-Item -LiteralPath (Join-Path $source $file) -Destination (Join-Path $notices $file)

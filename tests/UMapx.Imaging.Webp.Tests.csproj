@@ -27,7 +27,7 @@
     <AssemblyMetadata Include="TestArchitecture" Value="$(TestArchitecture)" />
   </ItemGroup>
   <ItemGroup Condition="'$(UsePackageUnderTest)' != 'true'">
-    <ProjectReference Include="../../sources/UMapx.Imaging.Webp.csproj" />
+    <ProjectReference Include="../sources/UMapx.Imaging.Webp.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(UsePackageUnderTest)' == 'true'">
     <PackageReference Include="UMapx.Imaging.Webp" Version="$(PackageVersionUnderTest)" />

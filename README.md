@@ -45,9 +45,9 @@ Optional .NET Framework 4.8 compatibility checks can be run with
 For coverage, run `dotnet test UMapx.Imaging.Webp.sln -c Release -p:GeneratePackageOnBuild=false -p:DebugType=portable -p:DebugSymbols=true --collect "XPlat Code Coverage"`.
 
 Native build sources, checksums and rebuilding instructions are recorded in
-`third-party/libwebp/README.md`, included in the NuGet package.
+`libwebp/README.md`, included in the NuGet package.
 
 # License
 The managed library is MIT licensed. The bundled libwebp and SharpYUV code is
-covered by the notices in the `third-party/libwebp/` directory inside the
+covered by the notices in the `libwebp/` directory inside the
 NuGet package.

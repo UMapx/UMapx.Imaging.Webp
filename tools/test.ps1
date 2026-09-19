@@ -38,7 +38,7 @@ foreach ($framework in $Frameworks) {
     foreach ($architecture in @('x64', 'x86')) {
         $output = Join-Path $repo "tests/bin/package-tests/$runId/$framework/$architecture"
         $intermediate = Join-Path $work "$framework/$architecture"
-        $arguments = @('publish', (Join-Path $repo 'tests/UMapx.Imaging.Webp.Tests/UMapx.Imaging.Webp.Tests.csproj'),
+        $arguments = @('publish', (Join-Path $repo 'tests/UMapx.Imaging.Webp.Tests.csproj'),
             '-c', 'Release', '--nologo', "-p:TestFramework=$framework", "-p:TestArchitecture=$architecture",
             '-p:UsePackageUnderTest=true', "-p:PackageVersionUnderTest=$version",
             "-p:RestoreConfigFile=$configPath", "-p:RestorePackagesPath=$work/packages",

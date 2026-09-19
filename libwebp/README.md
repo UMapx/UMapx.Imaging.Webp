@@ -1,8 +1,10 @@
-Bundled libwebp: 1.6.0 (including SharpYUV 0.4.2).
+# Bundled libwebp
 
-Upstream: https://developers.google.com/speed/webp/download
+Version: **libwebp 1.6.0**, including **SharpYUV 0.4.2**.
 
-Source archive: https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.6.0.tar.gz
+Upstream: [WebP downloads](https://developers.google.com/speed/webp/download).
+
+Source archive: [libwebp-1.6.0.tar.gz](https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.6.0.tar.gz).
 
 Source SHA-256: `e4ab7009bf0629fd11982d4c2aa83964cf244cffba7347ecd39019a9e38c4564`
 
@@ -14,7 +16,7 @@ The compiler is a build tool only and is not shipped in the NuGet package.
 `MINGW-COPYING` and `ZIG-LICENSE` accompany the runtime support code linked
 by the compiler.
 
-Compiler archive: https://ziglang.org/download/0.14.1/zig-x86_64-windows-0.14.1.zip
+Compiler archive: [Zig 0.14.1 for Windows x64](https://ziglang.org/download/0.14.1/zig-x86_64-windows-0.14.1.zip).
 
 Compiler SHA-256: `554f5378228923ffd558eac35e21af020c73789d87afeabf4bfd16f2e6feed2c`
 
@@ -23,9 +25,17 @@ Compiler SHA-256: `554f5378228923ffd558eac35e21af020c73789d87afeabf4bfd16f2e6fee
 | `sources/libwebp_x64.dll` | x86_64-windows-gnu | `359c16ac843db95fa5d7e9a31bf8c59e325efae4cd0bfb6fb212e4742c0e22a0` |
 | `sources/libwebp_x86.dll` | x86-windows-gnu | `e46c0c0c02bd385c1487128c92c47a8c3de7226459304523384204abb99341ae` |
 
-To rebuild on Windows, run `./tools/build-native.ps1` from PowerShell. It verifies
+These paths are relative to the repository root. In the NuGet package, the DLLs
+are under `runtimes/win-x64/native/` and `runtimes/win-x86/native/`, respectively.
+
+## Rebuilding
+
+Use a Windows x64 build host with PowerShell and `tar` available on `PATH`.
+The first build needs network access to download the source and compiler archives.
+Run `./tools/build-native.ps1` from the repository root in PowerShell. It verifies
 the pinned archive hashes before extracting them, builds both architectures,
 then replaces the DLLs and refreshes upstream `COPYING`, `PATENTS` and `AUTHORS`.
-Build products and the downloaded compiler stay under `sources/obj/native-update`.
+Build products and the downloaded compiler stay under `sources/obj/native-update`
+by default; `-WorkDirectory` selects a different working directory.
 Record fresh DLL hashes here after an intentional rebuild; build paths/toolchain
 metadata may affect binary hashes. Run `./tools/test.ps1` before publishing.

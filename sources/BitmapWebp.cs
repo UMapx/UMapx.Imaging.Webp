@@ -7,13 +7,20 @@ using System.Runtime.InteropServices;
 namespace UMapx.Imaging
 {
     /// <summary>Converts Windows bitmaps to and from WebP images.</summary>
+    /// <remarks>
+    /// Supports Windows x86 and x64. Image metadata is not preserved.
+    /// Concurrent encodes must use separate input bitmaps.
+    /// </remarks>
     public static class BitmapWebp
     {
         private const int WEBP_MAX_DIMENSION = 16383;
 
-        /// <summary>Converts a still WebP image to a bitmap. The caller owns the bitmap.</summary>
+        /// <summary>Decodes a still WebP image to a bitmap.</summary>
         /// <param name="rawWebP">Encoded WebP image.</param>
-        /// <returns>The decoded bitmap.</returns>
+        /// <returns>
+        /// A bitmap in <see cref="PixelFormat.Format32bppArgb"/> if the image has an alpha channel,
+        /// or <see cref="PixelFormat.Format24bppRgb"/> otherwise. The caller must dispose it.
+        /// </returns>
         /// <exception cref="ArgumentNullException">The input is null.</exception>
         /// <exception cref="InvalidDataException">The image is empty, invalid or incomplete.</exception>
         /// <exception cref="NotSupportedException">The image is animated.</exception>
@@ -67,8 +74,12 @@ namespace UMapx.Imaging
         }
 
         /// <summary>Converts a bitmap to lossless WebP. RGB values of fully transparent pixels may change.</summary>
-        /// <param name="bitmap">A 24bpp RGB or 32bpp ARGB bitmap.</param>
+        /// <param name="bitmap">A 24bpp RGB or 32bpp ARGB bitmap, from 1 to 16383 pixels in each dimension.</param>
         /// <returns>The encoded WebP image.</returns>
+        /// <remarks>The caller retains ownership of <paramref name="bitmap"/>.</remarks>
+        /// <exception cref="ArgumentNullException">The bitmap is null.</exception>
+        /// <exception cref="NotSupportedException">The pixel format is unsupported or a dimension exceeds 16383 pixels.</exception>
+        /// <exception cref="InvalidOperationException">The WebP encoder fails.</exception>
         public static byte[] ToWebp(this Bitmap bitmap)
         {
             ValidateBitmap(bitmap);
@@ -104,10 +115,15 @@ namespace UMapx.Imaging
         }
 
         /// <summary>Converts a bitmap to lossy WebP with the specified quality and compression effort.</summary>
-        /// <param name="bitmap">A 24bpp RGB or 32bpp ARGB bitmap.</param>
-        /// <param name="quality">Quality from 0 to 100.</param>
-        /// <param name="speed">Compression effort from 0 (fastest) to 9 (slowest).</param>
+        /// <param name="bitmap">A 24bpp RGB or 32bpp ARGB bitmap, from 1 to 16383 pixels in each dimension.</param>
+        /// <param name="quality">Color and alpha quality from 0 to 100. Color compression remains lossy at 100.</param>
+        /// <param name="speed">Compression effort from 0 to 9. Higher values request more effort.</param>
         /// <returns>The encoded WebP image.</returns>
+        /// <remarks>Alpha values may change below quality 100. The caller retains ownership of <paramref name="bitmap"/>.</remarks>
+        /// <exception cref="ArgumentNullException">The bitmap is null.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Quality is outside 0 to 100 or speed is outside 0 to 9.</exception>
+        /// <exception cref="NotSupportedException">The pixel format is unsupported or a dimension exceeds 16383 pixels.</exception>
+        /// <exception cref="InvalidOperationException">The WebP encoder fails.</exception>
         public static byte[] ToWebp(this Bitmap bitmap, int quality, int speed)
         {
             ValidateBitmap(bitmap);

@@ -13,11 +13,11 @@ namespace UMapx.Imaging
         private const int WEBP_DECODER_ABI_VERSION = 0x0210;
         private const int WEBP_ENCODER_ABI_VERSION = 0x0210;
 
-        /// <summary>This function will initialize the configuration according to a predefined set of parameters (referred to by 'preset') and a given quality factor</summary>
+        /// <summary>Initializes the encoder configuration using a preset and quality factor.</summary>
         /// <param name="config">The WebPConfig structure</param>
         /// <param name="preset">Type of image</param>
-        /// <param name="quality">Quality of compression</param>
-        /// <returns>0 if error</returns>
+        /// <param name="quality">Compression quality from 0 to 100.</param>
+        /// <returns>1 on success; 0 if initialization fails.</returns>
         internal static int WebPConfigInit(ref WebPConfig config, WebPPreset preset, float quality)
         {
             switch (IntPtr.Size)
@@ -35,11 +35,11 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPConfigInitInternal")]
         private static extern int WebPConfigInitInternal_x64(ref WebPConfig config, WebPPreset preset, float quality, int encoderAbiVersion);
 
-        /// <summary>Get info of WepP image</summary>
-        /// <param name="rawWebP">Bytes[] of WebP image</param>
-        /// <param name="data_size">Size of rawWebP</param>
-        /// <param name="features">Features of WebP image</param>
-        /// <returns>VP8StatusCode</returns>
+        /// <summary>Reads the dimensions, alpha flag and animation flag from a WebP header.</summary>
+        /// <param name="rawWebP">Pointer to the encoded WebP data.</param>
+        /// <param name="data_size">Length of the encoded data in bytes.</param>
+        /// <param name="features">Receives the image features.</param>
+        /// <returns>VP8_STATUS_OK on success, or a decoder status describing the failure.</returns>
         internal static VP8StatusCode WebPGetFeatures(IntPtr rawWebP, int data_size, ref WebPBitstreamFeatures features)
         {
             switch (IntPtr.Size)
@@ -57,10 +57,10 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPGetFeaturesInternal")]
         private static extern VP8StatusCode WebPGetFeaturesInternal_x64([InAttribute()] IntPtr rawWebP, UIntPtr data_size, ref WebPBitstreamFeatures features, int WEBP_DECODER_ABI_VERSION);
 
-        /// <summary>Activate the lossless compression mode with the desired efficiency</summary>
+        /// <summary>Enables lossless compression at the specified effort level.</summary>
         /// <param name="config">The WebPConfig struct</param>
-        /// <param name="level">between 0 (fastest, lowest compression) and 9 (slower, best compression)</param>
-        /// <returns>0 in case of parameter error</returns>
+        /// <param name="level">Effort from 0 (fastest) to 9 (slowest).</param>
+        /// <returns>1 on success; 0 if the parameters are invalid.</returns>
         internal static int WebPConfigLosslessPreset(ref WebPConfig config, int level)
         {
             switch (IntPtr.Size)
@@ -78,9 +78,9 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPConfigLosslessPreset")]
         private static extern int WebPConfigLosslessPreset_x64(ref WebPConfig config, int level);
 
-        /// <summary>Check that configuration is non-NULL and all configuration parameters are within their valid ranges</summary>
+        /// <summary>Checks that all encoder configuration parameters are within their valid ranges.</summary>
         /// <param name="config">The WebPConfig structure</param>
-        /// <returns>1 if configuration is OK</returns>
+        /// <returns>1 if the configuration is valid; 0 otherwise.</returns>
         internal static int WebPValidateConfig(ref WebPConfig config)
         {
             switch (IntPtr.Size)
@@ -98,9 +98,9 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPValidateConfig")]
         private static extern int WebPValidateConfig_x64(ref WebPConfig config);
 
-        /// <summary>Initialize the WebPPicture structure checking the DLL version</summary>
+        /// <summary>Initializes a WebPPicture structure and checks encoder ABI compatibility.</summary>
         /// <param name="wpic">The WebPPicture structure</param>
-        /// <returns>1 if not error</returns>
+        /// <returns>1 on success; 0 if initialization fails.</returns>
         internal static int WebPPictureInitInternal(ref WebPPicture wpic)
         {
             switch (IntPtr.Size)
@@ -118,11 +118,11 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPPictureInitInternal")]
         private static extern int WebPPictureInitInternal_x64(ref WebPPicture wpic, int encoderAbiVersion);
 
-        /// <summary>Colorspace conversion function to import RGB samples</summary>
+        /// <summary>Imports packed BGR samples into a WebPPicture.</summary>
         /// <param name="wpic">The WebPPicture structure</param>
-        /// <param name="bgr">Point to BGR data</param>
-        /// <param name="stride">stride of BGR data</param>
-        /// <returns>Returns 0 in case of memory error</returns>
+        /// <param name="bgr">Pointer to BGR data.</param>
+        /// <param name="stride">Distance between rows in bytes.</param>
+        /// <returns>1 on success; 0 if the import fails.</returns>
         internal static int WebPPictureImportBGR(ref WebPPicture wpic, IntPtr bgr, int stride)
         {
             switch (IntPtr.Size)
@@ -140,11 +140,11 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPPictureImportBGR")]
         private static extern int WebPPictureImportBGR_x64(ref WebPPicture wpic, IntPtr bgr, int stride);
 
-        /// <summary>Color-space conversion function to import RGB samples</summary>
+        /// <summary>Imports packed BGRA samples, including alpha, into a WebPPicture.</summary>
         /// <param name="wpic">The WebPPicture structure</param>
-        /// <param name="bgra">Point to BGRA data</param>
-        /// <param name="stride">stride of BGRA data</param>
-        /// <returns>Returns 0 in case of memory error</returns>
+        /// <param name="bgra">Pointer to BGRA data.</param>
+        /// <param name="stride">Distance between rows in bytes.</param>
+        /// <returns>1 on success; 0 if the import fails.</returns>
         internal static int WebPPictureImportBGRA(ref WebPPicture wpic, IntPtr bgra, int stride)
         {
             switch (IntPtr.Size)
@@ -162,11 +162,11 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPPictureImportBGRA")]
         private static extern int WebPPictureImportBGRA_x64(ref WebPPicture wpic, IntPtr bgra, int stride);
 
-        /// <summary>Color-space conversion function to import RGB samples</summary>
+        /// <summary>Imports packed BGRX samples into a WebPPicture, ignoring each pixel's fourth byte.</summary>
         /// <param name="wpic">The WebPPicture structure</param>
-        /// <param name="bgr">Point to BGR data</param>
-        /// <param name="stride">stride of BGR data</param>
-        /// <returns>Returns 0 in case of memory error</returns>
+        /// <param name="bgr">Pointer to BGRX data.</param>
+        /// <param name="stride">Distance between rows in bytes.</param>
+        /// <returns>1 on success; 0 if the import fails.</returns>
         internal static int WebPPictureImportBGRX(ref WebPPicture wpic, IntPtr bgr, int stride)
         {
             switch (IntPtr.Size)
@@ -184,17 +184,17 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPPictureImportBGRX")]
         private static extern int WebPPictureImportBGRX_x64(ref WebPPicture wpic, IntPtr bgr, int stride);
 
-        /// <summary>The writer type for output compress data</summary>
-        /// <param name="data">Data returned</param>
-        /// <param name="data_size">Size of data returned</param>
-        /// <param name="wpic">Picture structure</param>
-        /// <returns></returns>
+        /// <summary>Receives a chunk of encoded WebP data from the encoder.</summary>
+        /// <param name="data">Pointer to the data to write.</param>
+        /// <param name="data_size">Number of bytes to write.</param>
+        /// <param name="wpic">Picture being encoded.</param>
+        /// <returns>1 if writing succeeds; 0 to abort encoding.</returns>
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         internal delegate int WebPMemoryWrite([In()] IntPtr data, UIntPtr data_size, ref WebPPicture wpic);
 
-        /// <summary>Compress to WebP format</summary>
+        /// <summary>Encodes a picture as WebP using its writer callback.</summary>
         /// <param name="config">The configuration structure for compression parameters</param>
-        /// <param name="picture">'picture' hold the source samples in both YUV(A) or ARGB input</param>
+        /// <param name="picture">Source samples in YUV(A) or ARGB format, with the output callback.</param>
         /// <returns>Returns 0 in case of error, 1 otherwise. In case of error, picture->error_code is updated accordingly</returns>
         internal static int WebPEncode(ref WebPConfig config, ref WebPPicture picture)
         {
@@ -236,12 +236,12 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPPictureFree")]
         private static extern void WebPPictureFree_x64(ref WebPPicture wpic);
 
-        /// <summary>Validate the WebP image header and retrieve the image height and width. Pointers *width and *height can be passed NULL if deemed irrelevant</summary>
+        /// <summary>Validates a WebP header and retrieves the image dimensions.</summary>
         /// <param name="data">Pointer to WebP image data</param>
         /// <param name="data_size">This is the size of the memory block pointed to by data containing the image data</param>
-        /// <param name="width">The range is limited currently from 1 to 16383</param>
-        /// <param name="height">The range is limited currently from 1 to 16383</param>
-        /// <returns>1 if success, otherwise error code returned in the case of (a) formatting error(s)</returns>
+        /// <param name="width">Receives the width in pixels.</param>
+        /// <param name="height">Receives the height in pixels.</param>
+        /// <returns>1 if the header is valid; 0 otherwise.</returns>
         internal static int WebPGetInfo(IntPtr data, int data_size, out int width, out int height)
         {
             switch (IntPtr.Size)
@@ -340,9 +340,9 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPDecodeARGBInto")]
         private static extern IntPtr WebPDecodeARGBInto_x64([InAttribute()] IntPtr data, UIntPtr data_size, IntPtr output_buffer, UIntPtr output_buffer_size, int output_stride);
 
-        /// <summary>Initialize the configuration as empty. This function must always be called first, unless WebPGetFeatures() is to be called</summary>
+        /// <summary>Initializes a decoder configuration before it is used by WebPDecode.</summary>
         /// <param name="webPDecoderConfig">Configuration structure</param>
-        /// <returns>False in case of mismatched version</returns>
+        /// <returns>1 on success; 0 if decoder ABI compatibility checks fail.</returns>
         internal static int WebPInitDecoderConfig(ref WebPDecoderConfig webPDecoderConfig)
         {
             switch (IntPtr.Size)
@@ -403,7 +403,7 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPFreeDecBuffer")]
         private static extern void WebPFreeDecBuffer_x64(ref WebPDecBuffer buffer);
 
-        /// <summary>Lossy encoding images</summary>
+        /// <summary>Encodes packed BGR samples using lossy WebP compression.</summary>
         /// <param name="bgr">Pointer to BGR image data</param>
         /// <param name="width">The range is limited currently from 1 to 16383</param>
         /// <param name="height">The range is limited currently from 1 to 16383</param>
@@ -428,7 +428,7 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPEncodeBGR")]
         private static extern int WebPEncodeBGR_x64([InAttribute()] IntPtr bgr, int width, int height, int stride, float quality_factor, out IntPtr output);
 
-        /// <summary>Lossy encoding images</summary>
+        /// <summary>Encodes packed BGRA samples using lossy WebP compression.</summary>
         /// <param name="bgra">Pointer to BGRA image data</param>
         /// <param name="width">The range is limited currently from 1 to 16383</param>
         /// <param name="height">The range is limited currently from 1 to 16383</param>
@@ -453,7 +453,7 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPEncodeBGRA")]
         private static extern int WebPEncodeBGRA_x64([InAttribute()] IntPtr bgra, int width, int height, int stride, float quality_factor, out IntPtr output);
 
-        /// <summary>Lossless encoding images pointed to by *data in WebP format</summary>
+        /// <summary>Encodes packed BGR samples using lossless WebP compression.</summary>
         /// <param name="bgr">Pointer to BGR image data</param>
         /// <param name="width">The range is limited currently from 1 to 16383</param>
         /// <param name="height">The range is limited currently from 1 to 16383</param>
@@ -477,7 +477,7 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPEncodeLosslessBGR")]
         private static extern UIntPtr WebPEncodeLosslessBGR_x64([InAttribute()] IntPtr bgr, int width, int height, int stride, out IntPtr output);
 
-        /// <summary>Lossless encoding images pointed to by *data in WebP format</summary>
+        /// <summary>Encodes packed BGRA samples using lossless WebP compression.</summary>
         /// <param name="bgra">Pointer to BGRA image data</param>
         /// <param name="width">The range is limited currently from 1 to 16383</param>
         /// <param name="height">The range is limited currently from 1 to 16383</param>
@@ -501,7 +501,7 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPEncodeLosslessBGRA")]
         private static extern UIntPtr WebPEncodeLosslessBGRA_x64([InAttribute()] IntPtr bgra, int width, int height, int stride, out IntPtr output);
 
-        /// <summary>Releases memory returned by the WebPEncode</summary>
+        /// <summary>Releases memory allocated by libwebp, such as output from WebPEncodeLosslessBGR.</summary>
         /// <param name="p">Pointer to memory</param>
         internal static void WebPFree(IntPtr p)
         {
@@ -522,8 +522,8 @@ namespace UMapx.Imaging
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPFree")]
         private static extern void WebPFree_x64(IntPtr p);
 
-        /// <summary>Get the WebP version library</summary>
-        /// <returns>8bits for each of major/minor/revision packet in integer. E.g: v2.5.7 is 0x020507</returns>
+        /// <summary>Returns the libwebp decoder version.</summary>
+        /// <returns>Major, minor and revision numbers packed into 8 bits each; for example, 1.6.0 is 0x010600.</returns>
         internal static int WebPGetDecoderVersion()
         {
             switch (IntPtr.Size)
@@ -545,8 +545,8 @@ namespace UMapx.Imaging
         /// <param name="srcPicture">Picture to measure</param>
         /// <param name="refPicture">Reference picture</param>
         /// <param name="metric_type">0 = PSNR, 1 = SSIM, 2 = LSIM</param>
-        /// <param name="pResult">dB in the Y/U/V/Alpha/All order</param>
-        /// <returns>False in case of error (the two pictures don't have same dimension, ...)</returns>
+        /// <param name="pResult">Pointer to five floating-point results in dB, in B/G/R/A/All order.</param>
+        /// <returns>1 on success; 0 on failure, such as mismatched image dimensions.</returns>
         internal static int WebPPictureDistortion(ref WebPPicture srcPicture, ref WebPPicture refPicture, int metric_type, IntPtr pResult)
         {
             switch (IntPtr.Size)
@@ -621,14 +621,17 @@ namespace UMapx.Imaging
         VP8_STATUS_OK = 0,
         /// <summary>Memory error allocating objects</summary>
         VP8_STATUS_OUT_OF_MEMORY,
-        /// <summary>Configuration is invalid</summary>
+        /// <summary>A decoder parameter is invalid.</summary>
         VP8_STATUS_INVALID_PARAM,
+        /// <summary>The encoded bitstream is invalid.</summary>
         VP8_STATUS_BITSTREAM_ERROR,
-        /// <summary>Configuration is invalid</summary>
+        /// <summary>The bitstream uses an unsupported feature.</summary>
         VP8_STATUS_UNSUPPORTED_FEATURE,
+        /// <summary>Incremental decoding is waiting for more input.</summary>
         VP8_STATUS_SUSPENDED,
         /// <summary>Abort request by user</summary>
         VP8_STATUS_USER_ABORT,
+        /// <summary>The available input is insufficient to complete decoding.</summary>
         VP8_STATUS_NOT_ENOUGH_DATA,
     }
 
@@ -660,13 +663,11 @@ namespace UMapx.Imaging
         MODE_BGRA = 3,
         /// <summary>Byte-order: A,R,G,B,A,R,G,B,..</summary>
         MODE_ARGB = 4,
-        /// <summary>Byte-order: RGB-565: [a4 a3 a2 a1 a0 r5 r4 r3], [r2 r1 r0 g4 g3 g2 g1 g0], ...
-        /// WEBP_SWAP_16BITS_CSP is defined, 
-        /// Byte-order: RGB-565: [a4 a3 a2 a1 a0 b5 b4 b3], [b2 b1 b0 g4 g3 g2 g1 g0], ..</summary>
+        /// <summary>RGBA with four bits per channel: one byte holds R/G, the next B/A.
+        /// The two bytes are swapped if WEBP_SWAP_16BITS_CSP is defined.</summary>
         MODE_RGBA_4444 = 5,
-        /// <summary>Byte-order: RGB-565: [r4 r3 r2 r1 r0 g5 g4 g3], [g2 g1 g0 b4 b3 b2 b1 b0], ...
-        /// WEBP_SWAP_16BITS_CSP is defined, 
-        /// Byte-order: [b3 b2 b1 b0 a3 a2 a1 a0], [r3 r2 r1 r0 g3 g2 g1 g0], ..</summary>
+        /// <summary>RGB with five red bits, six green bits and five blue bits per pixel.
+        /// The bytes are ordered RRRRRGGG, GGGBBBBB, and swapped if WEBP_SWAP_16BITS_CSP is defined.</summary>
         MODE_RGB_565 = 6,
         /// <summary>RGB-premultiplied transparent modes (alpha value is preserved)</summary>
         MODE_rgbA = 7,
@@ -678,7 +679,7 @@ namespace UMapx.Imaging
         MODE_rgbA_4444 = 10,
         /// <summary>YUV 4:2:0</summary>
         MODE_YUV = 11,
-        /// <summary>YUV 4:2:0</summary>
+        /// <summary>YUV 4:2:0 with a separate alpha plane.</summary>
         MODE_YUVA = 12,
         /// <summary>MODE_LAST -> 13</summary>
         MODE_LAST = 13,
@@ -730,15 +731,15 @@ namespace UMapx.Imaging
     {
         /// <summary>Lossless encoding (0=lossy(default), 1=lossless)</summary>
         public int lossless;
-        /// <summary>Between 0 (smallest file) and 100 (biggest)</summary>
+        /// <summary>Quality from 0 to 100 for lossy encoding; compression effort from 0 to 100 for lossless encoding.</summary>
         public float quality;
         /// <summary>Quality/speed trade-off (0=fast, 6=slower-better)</summary>
         public int method;
         /// <summary>Hint for image type (lossless only for now)</summary>
         public WebPImageHint image_hint;
-        /// <summary>If non-zero, set the desired target size in bytes. Takes precedence over the 'compression' parameter</summary>
+        /// <summary>If non-zero, sets the desired output size in bytes and takes precedence over quality.</summary>
         public int target_size;
-        /// <summary>If non-zero, specifies the minimal distortion to try to achieve. Takes precedence over target_size</summary>
+        /// <summary>If non-zero, specifies the minimum PSNR to aim for and takes precedence over target_size.</summary>
         public float target_PSNR;
         /// <summary>Maximum number of segments to use, in [1..4]</summary>
         public int segments;
@@ -754,7 +755,7 @@ namespace UMapx.Imaging
         public int autofilter;
         /// <summary>Algorithm for encoding the alpha plane (0 = none, 1 = compressed with WebP lossless). Default is 1</summary>
         public int alpha_compression;
-        /// <summary>Predictive filtering method for alpha plane. 0: none, 1: fast, 2: best. Default if 1</summary>
+        /// <summary>Predictive filtering for the alpha plane: 0 = none, 1 = fast, 2 = best. Default is 1.</summary>
         public int alpha_filtering;
         /// <summary>Between 0 (smallest size) and 100 (lossless). Default is 100</summary>
         public int alpha_quality;
@@ -794,7 +795,7 @@ namespace UMapx.Imaging
     {
         /// <summary>Main flag for encoder selecting between ARGB or YUV input. Recommended to use ARGB input (*argb, argb_stride) for lossless, and YUV input (*y, *u, *v, etc.) for lossy</summary>
         public int use_argb;
-        /// <summary>Color-space: should be YUV420 for now (=Y'CbCr). Value = 0</summary>
+        /// <summary>YUV color space: 0 = YUV420, 4 = YUV420 with alpha.</summary>
         public UInt32 colorspace;
         /// <summary>Width of picture (less or equal to WEBP_MAX_DIMENSION)</summary>
         public int width;
@@ -882,31 +883,31 @@ namespace UMapx.Imaging
         public int block_count_skipped;
         /// <summary>Approximate number of bytes spent for header</summary>
         public int header_bytes;
-        /// <summary>Approximate number of bytes spent for  mode-partition #0</summary>
+        /// <summary>Approximate number of bytes used for mode partition 0.</summary>
         public int mode_partition_0;
-        /// <summary>Approximate number of bytes spent for DC coefficients for segment 0</summary>
+        /// <summary>Native residual_bytes[0][0]: bytes used for DC coefficients in segment 0.</summary>
         public int residual_bytes_DC_segments0;
-        /// <summary>Approximate number of bytes spent for AC coefficients for segment 0</summary>
+        /// <summary>Native residual_bytes[0][1]: bytes used for DC coefficients in segment 1.</summary>
         public int residual_bytes_AC_segments0;
-        /// <summary>Approximate number of bytes spent for UV coefficients for segment 0</summary>
+        /// <summary>Native residual_bytes[0][2]: bytes used for DC coefficients in segment 2.</summary>
         public int residual_bytes_uv_segments0;
-        /// <summary>Approximate number of bytes spent for DC coefficients for segment 1</summary>
+        /// <summary>Native residual_bytes[0][3]: bytes used for DC coefficients in segment 3.</summary>
         public int residual_bytes_DC_segments1;
-        /// <summary>Approximate number of bytes spent for AC coefficients for segment 1</summary>
+        /// <summary>Native residual_bytes[1][0]: bytes used for AC coefficients in segment 0.</summary>
         public int residual_bytes_AC_segments1;
-        /// <summary>Approximate number of bytes spent for UV coefficients for segment 1</summary>
+        /// <summary>Native residual_bytes[1][1]: bytes used for AC coefficients in segment 1.</summary>
         public int residual_bytes_uv_segments1;
-        /// <summary>Approximate number of bytes spent for DC coefficients for segment 2</summary>
+        /// <summary>Native residual_bytes[1][2]: bytes used for AC coefficients in segment 2.</summary>
         public int residual_bytes_DC_segments2;
-        /// <summary>Approximate number of bytes spent for AC coefficients for segment 2</summary>
+        /// <summary>Native residual_bytes[1][3]: bytes used for AC coefficients in segment 3.</summary>
         public int residual_bytes_AC_segments2;
-        /// <summary>Approximate number of bytes spent for UV coefficients for segment 2</summary>
+        /// <summary>Native residual_bytes[2][0]: bytes used for UV coefficients in segment 0.</summary>
         public int residual_bytes_uv_segments2;
-        /// <summary>Approximate number of bytes spent for DC coefficients for segment 3</summary>
+        /// <summary>Native residual_bytes[2][1]: bytes used for UV coefficients in segment 1.</summary>
         public int residual_bytes_DC_segments3;
-        /// <summary>Approximate number of bytes spent for AC coefficients for segment 3</summary>
+        /// <summary>Native residual_bytes[2][2]: bytes used for UV coefficients in segment 2.</summary>
         public int residual_bytes_AC_segments3;
-        /// <summary>Approximate number of bytes spent for UV coefficients for segment 3</summary>
+        /// <summary>Native residual_bytes[2][3]: bytes used for UV coefficients in segment 3.</summary>
         public int residual_bytes_uv_segments3;
         /// <summary>Number of macro-blocks in segments 0</summary>
         public int segment_size_segments0;
@@ -946,7 +947,7 @@ namespace UMapx.Imaging
         public int transform_bits;
         /// <summary>Number of bits for color cache lookup</summary>
         public int cache_bits;
-        /// <summary>Number of color in palette, if used</summary>
+        /// <summary>Number of colors in the palette, if used.</summary>
         public int palette_size;
         /// <summary>Final lossless size</summary>
         public int lossless_size;
@@ -954,7 +955,7 @@ namespace UMapx.Imaging
         public int lossless_hdr_size;
         /// <summary>Lossless image data size</summary>
         public int lossless_data_size;
-        /// <summary>Padding for later use</summary>
+        /// <summary>Cross-color transform precision followed by one reserved word in libwebp 1.6.0.</summary>
         [MarshalAsAttribute(UnmanagedType.ByValArray, SizeConst = 2, ArraySubType = UnmanagedType.U4)]
         private readonly uint[] pad;
     };

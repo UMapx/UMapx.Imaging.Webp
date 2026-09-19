@@ -1,0 +1,1 @@
+dotnet build sources/UMapx.Imaging.Webp.csproj -c Release

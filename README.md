@@ -11,6 +11,8 @@ byte[] lossless = bitmap.ToWebp();
 byte[] lossy = bitmap.ToWebp(quality: 75, speed: 4);
 using var decoded = lossless.FromWebp();
 ```
+
+# Quick start
 To get started with **UMapx.Imaging.Webp** try simple [example](https://github.com/UMapx/UMapx.Imaging.Webp/tree/main/examples).
 The example targets .NET 8 for Windows. Run it from the repository root with
 `dotnet run --project examples/UMapx.Imaging.Webp.Example.csproj -c Release`.
@@ -26,7 +28,7 @@ Linux, macOS and native ARM64 processes are not supported.
 Supported bitmap formats are `Format24bppRgb` and `Format32bppArgb`, up to
 16383 pixels in each dimension. `ToWebp()` uses lossless compression; RGB values
 under fully transparent pixels may change. The quality overload uses lossy
-compression with quality 0–100 and effort 0–9 (higher effort is slower).
+compression with quality 0-100 and effort 0-9 (higher effort is slower).
 Invalid or incomplete WebP data throws `InvalidDataException`; animated WebP
 is not supported. Dispose decoded bitmaps when finished. Concurrent calls must
 use separate input bitmaps.

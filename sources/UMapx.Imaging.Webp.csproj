@@ -12,8 +12,8 @@
 		<Product>UMapx</Product>
 		<Copyright>Valery Asiryan, © 2015-2026</Copyright>
 		<Description>UMapx sub-library for interacting with webp images.</Description>
-		<PackageProjectUrl>https://github.com/asiryan/UMapx</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/asiryan/UMapx</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/UMapx/UMapx.Imaging.Webp</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/UMapx/UMapx.Imaging.Webp</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>converter bitmap webp libwebp imaging umapx</PackageTags>
 		<NeutralLanguage>en</NeutralLanguage>
@@ -21,6 +21,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageIcon>umapxnet.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -46,10 +47,14 @@
 
 	<ItemGroup>
 	  <Content Include="libwebp_x64.dll">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <PackagePath>runtimes/win-x64/native/</PackagePath>
 	  </Content>
 	  <Content Include="libwebp_x86.dll">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <PackagePath>runtimes/win-x86/native/</PackagePath>
 	  </Content>
 	</ItemGroup>
 
@@ -58,6 +63,8 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<None Include="../README.md" Pack="true" PackagePath="/" />
+		<None Include="../third-party/libwebp/*" Pack="true" PackagePath="third-party/libwebp/" />
 		<None Include="LICENSE.md">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>

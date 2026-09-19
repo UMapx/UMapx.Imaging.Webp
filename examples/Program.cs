@@ -10,8 +10,8 @@ namespace UMapx.Imaging.Webp.Example
         static void Main()
         {
             Console.WriteLine("UMapx.Imaging.Webp example");
-            var files = Directory.GetFiles(@"..\..\..\images", "*.*", SearchOption.AllDirectories);
-            var path = @"..\..\..\results";
+            var files = Directory.GetFiles(Path.Combine(AppContext.BaseDirectory, "images"), "*.*", SearchOption.AllDirectories);
+            var path = Path.Combine(AppContext.BaseDirectory, "results");
             Directory.CreateDirectory(path);
 
             Console.WriteLine($"Processing {files.Length} images");
@@ -45,7 +45,6 @@ namespace UMapx.Imaging.Webp.Example
             }
 
             Console.WriteLine("Done.");
-            Console.ReadKey();
         }
     }
 }

@@ -5,75 +5,27 @@
     </assembly>
     <members>
         <member name="T:UMapx.Imaging.BitmapWebp">
-            <summary>
-            Used to work with webp bitmap format.
-            </summary>
-        </member>
-        <member name="F:UMapx.Imaging.BitmapWebp.WEBP_MAX_DIMENSION">
-            <summary>
-            WEBP_MAX_DIMENSION
-            </summary>
+            <summary>Converts Windows bitmaps to and from WebP images.</summary>
         </member>
         <member name="M:UMapx.Imaging.BitmapWebp.FromWebp(System.Byte[])">
-            <summary>
-            Converts webp data to bitmap.
-            </summary>
-            <param name="rawWebP">Raw webp</param>
-            <returns>Bitmap</returns>
+            <summary>Converts a still WebP image to a bitmap. The caller owns the bitmap.</summary>
+            <param name="rawWebP">Encoded WebP image.</param>
+            <returns>The decoded bitmap.</returns>
+            <exception cref="T:System.ArgumentNullException">The input is null.</exception>
+            <exception cref="T:System.IO.InvalidDataException">The image is empty, invalid or incomplete.</exception>
+            <exception cref="T:System.NotSupportedException">The image is animated.</exception>
         </member>
         <member name="M:UMapx.Imaging.BitmapWebp.ToWebp(System.Drawing.Bitmap)">
-            <summary>
-            Converts bitmap to webp format.
-            </summary>
-            <param name="bitmap">Bitmap</param>
-            <returns>Web data</returns>
-            <exception cref="T:System.ArgumentException">Argument exception</exception>
-            <exception cref="T:System.NotSupportedException">Not supported exception</exception>
-            <exception cref="T:System.Exception">Exception</exception>
+            <summary>Converts a bitmap to lossless WebP. RGB values of fully transparent pixels may change.</summary>
+            <param name="bitmap">A 24bpp RGB or 32bpp ARGB bitmap.</param>
+            <returns>The encoded WebP image.</returns>
         </member>
         <member name="M:UMapx.Imaging.BitmapWebp.ToWebp(System.Drawing.Bitmap,System.Int32,System.Int32)">
-            <summary>
-            Converts bitmap to webp format.
-            </summary>
-            <param name="bitmap">Bitmap</param>
-            <param name="quality">Between 0 (lower quality, lowest file size) and 100 (highest quality, higher file size)</param>
-            <param name="speed">Between 0 (fastest, lowest compression) and 9 (slower, best compression)</param>
-            <returns></returns>
-            <exception cref="T:System.Exception">Exception</exception>
-        </member>
-        <member name="M:UMapx.Imaging.BitmapWebp.GetWebpInfo(System.Byte[],System.Int32@,System.Int32@,System.Boolean@,System.Boolean@,System.String@)">
-            <summary>Get info of WEBP data</summary>
-            <param name="rawWebP">The data of WebP</param>
-            <param name="width">width of image</param>
-            <param name="height">height of image</param>
-            <param name="has_alpha">Image has alpha channel</param>
-            <param name="has_animation">Image is a animation</param>
-            <param name="format">Format of image: 0 = undefined (/mixed), 1 = lossy, 2 = lossless</param>
-        </member>
-        <member name="M:UMapx.Imaging.BitmapWebp.AdvancedEncode(System.Drawing.Bitmap,UMapx.Imaging.WebPConfig,System.Boolean)">
-            <summary>Encoding image  using Advanced encoding API</summary>
-            <param name="bmp">Bitmap with the image</param>
-            <param name="config">Configuration for encode</param>
-            <param name="info">True if need encode info</param>
-            <returns>Compressed data</returns>
-        </member>
-        <member name="M:UMapx.Imaging.BitmapWebp.MyWriter(System.IntPtr,System.UIntPtr,UMapx.Imaging.WebPPicture@)">
-            <summary>
-            
-            </summary>
-            <param name="data"></param>
-            <param name="data_size"></param>
-            <param name="picture"></param>
-            <returns></returns>
-        </member>
-        <member name="T:UMapx.Imaging.BitmapWebp.MyWriterDelegate">
-            <summary>
-            
-            </summary>
-            <param name="data"></param>
-            <param name="data_size"></param>
-            <param name="picture"></param>
-            <returns></returns>
+            <summary>Converts a bitmap to lossy WebP with the specified quality and compression effort.</summary>
+            <param name="bitmap">A 24bpp RGB or 32bpp ARGB bitmap.</param>
+            <param name="quality">Quality from 0 to 100.</param>
+            <param name="speed">Compression effort from 0 (fastest) to 9 (slowest).</param>
+            <returns>The encoded WebP image.</returns>
         </member>
         <member name="M:UMapx.Imaging.UnsafeNativeMethods.WebPConfigInit(UMapx.Imaging.WebPConfig@,UMapx.Imaging.WebPPreset,System.Single)">
             <summary>This function will initialize the configuration according to a predefined set of parameters (referred to by 'preset') and a given quality factor</summary>
@@ -505,8 +457,11 @@
         <member name="F:UMapx.Imaging.WebPConfig.use_sharp_yuv">
             <summary>If needed, use sharp (and slow) RGB->YUV conversion</summary>
         </member>
-        <member name="F:UMapx.Imaging.WebPConfig.pad1">
-            <summary>Padding for later use</summary>
+        <member name="F:UMapx.Imaging.WebPConfig.qmin">
+            <summary>Minimum permissible quality factor</summary>
+        </member>
+        <member name="F:UMapx.Imaging.WebPConfig.qmax">
+            <summary>Maximum permissible quality factor</summary>
         </member>
         <member name="T:UMapx.Imaging.WebPPicture">
             <summary>Main exchange structure (input samples, output bytes, statistics)</summary>

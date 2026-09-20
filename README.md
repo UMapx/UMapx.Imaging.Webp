@@ -64,17 +64,11 @@ bitmaps; do not modify input data while a conversion is running.
 
 # Build and test
 
-Run the following commands from the repository root on Windows.
+Run the following commands from the repository root on Windows with .NET SDK 8
+or later and the .NET 8 x64 runtime installed.
 Build the solution with `dotnet build UMapx.Imaging.Webp.sln -c Release`.
-Run `dotnet test UMapx.Imaging.Webp.sln -c Release` for the default xUnit
-x64 tests against the source project. Tests are also discoverable in Visual Studio.
-Run `./tools/test.ps1` in PowerShell to build and test the actual NuGet package
-on x86 and x64 using .NET 8, with TRX reports under `tests/obj/package-tests`.
-The script requires .NET SDK 8 or later and .NET 8
-runtimes for x64 and x86. The library itself remains on .NET Standard 2.0.
-Optional .NET Framework 4.8 compatibility checks can be run with
-`./tools/test.ps1 -Frameworks net48,net8.0-windows`; these also require the
-.NET Framework 4.8 targeting pack.
+Run `dotnet test UMapx.Imaging.Webp.sln -c Release` to execute the xUnit tests
+against the source project on .NET 8 x64. Tests are also discoverable in Visual Studio.
 For coverage, run `dotnet test UMapx.Imaging.Webp.sln -c Release -p:GeneratePackageOnBuild=false -p:DebugType=portable -p:DebugSymbols=true --collect "XPlat Code Coverage"`.
 
 Native source download links, checksums and build instructions are recorded in

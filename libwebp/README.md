@@ -38,4 +38,5 @@ then replaces the DLLs and refreshes upstream `COPYING`, `PATENTS` and `AUTHORS`
 Build products and the downloaded compiler stay under `sources/obj/native-update`
 by default; `-WorkDirectory` selects a different working directory.
 Record fresh DLL hashes here after an intentional rebuild; build paths/toolchain
-metadata may affect binary hashes. Run `./tools/test.ps1` before publishing.
+metadata may affect binary hashes. Run `dotnet test UMapx.Imaging.Webp.sln -c Release`
+from the repository root before publishing.

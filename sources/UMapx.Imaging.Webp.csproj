@@ -1,76 +1,76 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<LangVersion>8.0</LangVersion>
-		<Version>8.0.0.2</Version>
-		<AssemblyVersion>8.0.0.2</AssemblyVersion>
-		<FileVersion>8.0.0.2</FileVersion>
-		<PackageId>UMapx.Imaging.Webp</PackageId>
-		<Company>Valery Asiryan</Company>
-		<Authors>Valery Asiryan</Authors>
-		<Product>UMapx</Product>
-		<Copyright>Valery Asiryan, © 2015-2026</Copyright>
-		<Description>UMapx sub-library for encoding and decoding WebP images on Windows.</Description>
-		<PackageProjectUrl>https://github.com/UMapx/UMapx.Imaging.Webp</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/UMapx/UMapx.Imaging.Webp</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>converter bitmap webp libwebp imaging umapx</PackageTags>
-		<NeutralLanguage>en</NeutralLanguage>
-		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<PackageIcon>umapxnet.png</PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-	</PropertyGroup>
+  <PropertyGroup>
+	<TargetFramework>netstandard2.0</TargetFramework>
+	<LangVersion>8.0</LangVersion>
+	<Version>8.0.0.2</Version>
+	<AssemblyVersion>8.0.0.2</AssemblyVersion>
+	<FileVersion>8.0.0.2</FileVersion>
+	<PackageId>UMapx.Imaging.Webp</PackageId>
+	<Company>Valery Asiryan</Company>
+	<Authors>Valery Asiryan</Authors>
+	<Product>UMapx</Product>
+	<Copyright>Valery Asiryan, © 2015-2026</Copyright>
+	<Description>UMapx sub-library for encoding and decoding WebP images on Windows.</Description>
+	<PackageProjectUrl>https://github.com/UMapx/UMapx.Imaging.Webp</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/UMapx/UMapx.Imaging.Webp</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageTags>converter bitmap webp libwebp imaging umapx</PackageTags>
+	<NeutralLanguage>en</NeutralLanguage>
+	<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	<PackageIcon>umapxnet.png</PackageIcon>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<DefineConstants>DEBUG;TRACE</DefineConstants>
-	</PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Optimize>true</Optimize>
-		<DebugType>none</DebugType>
-		<DebugSymbols>false</DebugSymbols>
-	</PropertyGroup>
-
-	<ItemGroup>
-	  <None Remove="libwebp_x64.dll" />
-	  <None Remove="libwebp_x86.dll" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="libwebp_x64.dll">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	    <PackagePath>runtimes/win-x64/native/</PackagePath>
-	  </Content>
-	  <Content Include="libwebp_x86.dll">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	    <PackagePath>runtimes/win-x86/native/</PackagePath>
-	  </Content>
-	</ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<Optimize>true</Optimize>
+	<DebugType>none</DebugType>
+	<DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="UMapx" Version="8.0.0.1" />
+	<None Remove="libwebp_x64.dll" />
+	<None Remove="libwebp_x86.dll" />
   </ItemGroup>
 
-	<ItemGroup>
-		<None Include="../README.md" Pack="true" PackagePath="/" />
-		<None Include="../libwebp/*" Pack="true" PackagePath="libwebp/" />
-		<None Include="LICENSE.md">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-		<None Include="umapxnet.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-	</ItemGroup>
+  <ItemGroup>
+	<Content Include="libwebp_x64.dll">
+	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	<PackagePath>runtimes/win-x64/native/</PackagePath>
+	</Content>
+	<Content Include="libwebp_x86.dll">
+	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	<PackagePath>runtimes/win-x86/native/</PackagePath>
+	</Content>
+  </ItemGroup>
+
+  <ItemGroup>
+  <PackageReference Include="UMapx" Version="8.0.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<None Include="../README.md" Pack="true" PackagePath="/" />
+	<None Include="../libwebp/*" Pack="true" PackagePath="libwebp/" />
+	<None Include="LICENSE.md">
+		<Pack>True</Pack>
+		<PackagePath></PackagePath>
+	</None>
+	<None Include="umapxnet.png">
+		<Pack>True</Pack>
+		<PackagePath></PackagePath>
+	</None>
+  </ItemGroup>
 
 </Project>

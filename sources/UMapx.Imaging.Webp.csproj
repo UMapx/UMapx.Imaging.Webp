@@ -15,7 +15,7 @@
 	<PackageProjectUrl>https://github.com/UMapx/UMapx.Imaging.Webp</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/UMapx/UMapx.Imaging.Webp</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
-	<PackageTags>converter bitmap webp libwebp imaging umapx</PackageTags>
+	<PackageTags>converter bitmap webp libwebp imaging</PackageTags>
 	<NeutralLanguage>en</NeutralLanguage>
 	<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
